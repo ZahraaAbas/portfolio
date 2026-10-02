@@ -1,15 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useActiveSection } from '../../hooks/useActiveSection.js'
 import './Navbar.css'
-
-const links = [
-  { href: '#home', label: 'Home' },
-  { href: '#about', label: 'About' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#contact', label: 'Contact' },
-]
-
+import { navLinks as links } from '../../data/navigation.js'
 const sectionIds = links.map((link) => link.href.slice(1))
 const MOBILE_QUERY = '(max-width: 768px)'
 
