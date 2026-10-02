@@ -30,6 +30,11 @@ html {
   /* keeps section titles from hiding under the sticky navbar */
   scroll-padding-top: var(--header-height);
 }
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
 
 body {
   font-family: var(--font);

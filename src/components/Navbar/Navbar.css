@@ -37,10 +37,39 @@
   border-radius: 8px;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
+.nav-links a {
+  position: relative;
+}
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a.active {
   background-color: rgba(233, 118, 182, 0.15);
   color: var(--pink);
+}
+
+/* small gradient line under the active link */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 2px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--gradient);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.nav-links a.active::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-links a,
+  .nav-links a::after {
+    transition: none;
+  }
 }
 
 @media (max-width: 520px) {
