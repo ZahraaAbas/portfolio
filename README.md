@@ -24,8 +24,8 @@ My personal portfolio as a frontend developer: a single-page site you explore by
 ```
 src/
 ├── components/   Navbar and Footer
-├── sections/     Hero, About, Skills, Projects, Contact (each with its own CSS)
-├── data/         Content: projects, skills, social links, navigation
+├── sections/     Hero, About, Skills, Projects, Certificates, Contact (each with its own CSS)
+├── data/         Content: projects, skills, certificates, social links, navigation
 ├── hooks/        Scroll and motion hooks (reveal, scroll progress, magnetic...)
 ├── utils/        Small helpers
 ├── styles/       Global styles and theme colors
@@ -55,6 +55,7 @@ All content lives in `src/data/`, so the design does not need to change:
 
 - **New project:** add an object to `src/data/projects.js` (title, description, features, tags, GitHub link, optional demo link and screenshot).
 - **New skill:** add `{ name, icon }` to the right category in `src/data/skills.js`. Icons come from [react-icons](https://react-icons.github.io/react-icons).
+- **New certificate:** add an object to `src/data/certificates.js` (title, issuer, date, status, description, credential link).
 - **New social link:** add it to `src/data/socials.js`.
 
 ## Contact

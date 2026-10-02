@@ -5,6 +5,7 @@ import About from './sections/About/About.jsx'
 import Projects from './sections/Projects/Projects.jsx'
 import Contact from './sections/Contact/Contact.jsx'
 import Skills from './sections/Skills/Skills.jsx'
+import Certificates from './sections/Certificates/Certificates.jsx'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <About />
         <Skills />
         <Projects />
+        <Certificates />
         <Contact />
       </main>
       <Footer />
