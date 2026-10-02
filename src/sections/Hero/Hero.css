@@ -327,3 +327,16 @@
     width: 340px;
   }
 }
+@media (max-width: 600px) {
+  .hero-main {
+    gap: 28px;
+  }
+
+  .hero-photo {
+    width: min(170px, 45vw);
+  }
+
+  .hero-photo::before {
+    transform: translate(10px, 10px);
+  }
+}
