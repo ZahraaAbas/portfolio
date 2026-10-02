@@ -4,6 +4,7 @@ import { skills } from '../../data/skills.js'
 import { useReveal } from '../../hooks/useReveal.js'
 import { useScrollProgress } from '../../hooks/useScrollProgress.js'
 import './About.css'
+import { skills } from '../../data/skills.js'
 
 const statement =
   "I'm a frontend developer passionate about building responsive and user-friendly websites. I enjoy transforming ideas into real projects, exploring new technologies, and continuously improving my skills."
@@ -46,13 +47,7 @@ function About() {
           engaging.
         </p>
 
-        <ul className="about-skills">
-          {skills.map((skill, index) => (
-            <li className="about-chip" key={skill} style={{ '--i': index + 4 }}>
-              {skill}
-            </li>
-          ))}
-        </ul>
+       
       </div>
     </section>
   )

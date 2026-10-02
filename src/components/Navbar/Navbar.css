@@ -83,4 +83,8 @@
     font-size: 14px;
     padding: 6px 10px;
   }
+    .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }

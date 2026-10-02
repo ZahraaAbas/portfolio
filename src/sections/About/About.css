@@ -77,29 +77,6 @@
   border-image: var(--gradient) 1;
 }
 
-.about-skills {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.about-chip {
-  padding: 8px 18px;
-  border-radius: 999px;
-  font-size: 15px;
-  color: var(--text);
-  background-color: rgba(58, 28, 61, 0.6);
-  border: 1px solid var(--border);
-  transition: border-color 0.25s ease, color 0.25s ease, translate 0.25s ease;
-}
-
-.about-chip:hover {
-  border-color: var(--cyan);
-  color: var(--cyan);
-  translate: 0 -2px;
-}
-
 /* ----- Motion ----- */
 @media (prefers-reduced-motion: no-preference) {
   .about:not(.is-visible) .about-reveal,
