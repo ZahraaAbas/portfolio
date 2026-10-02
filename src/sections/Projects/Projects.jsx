@@ -1,3 +1,4 @@
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa'
 import { projects } from '../../data/projects.js'
 import './Projects.css'
 
@@ -19,19 +20,40 @@ function Projects() {
               {project.image ? (
                 <img src={project.image} alt={`${project.title} screenshot`} />
               ) : (
-                'Screenshot coming soon'
+                <span className="project-thumb-title" aria-hidden="true">{project.title}</span>
               )}
             </div>
 
             <div className="project-body">
               <h3>{project.title}</h3>
               <p>{project.description}</p>
+
+              {project.features?.length > 0 && (
+                <ul className="project-features">
+                  {project.features.map((feature) => (
+                    <li key={feature}>{feature}</li>
+                  ))}
+                </ul>
+              )}
+
               <ul className="project-tags">
                 {project.tags.map((tag) => (
                   <li className="tag" key={tag}>{tag}</li>
                 ))}
               </ul>
-              <a href={project.link} className="project-link">View Project →</a>
+
+              <div className="project-links">
+                {project.github && (
+                  <a href={project.github} className="project-link" target="_blank" rel="noopener noreferrer">
+                    <FaGithub aria-hidden="true" /> GitHub
+                  </a>
+                )}
+                {project.demo && (
+                  <a href={project.demo} className="project-link" target="_blank" rel="noopener noreferrer">
+                    <FaExternalLinkAlt aria-hidden="true" /> Live demo
+                  </a>
+                )}
+              </div>
             </div>
           </article>
         ))}
