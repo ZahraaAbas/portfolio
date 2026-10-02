@@ -1,62 +1,101 @@
+import { useEffect, useRef, useState } from 'react'
+import { FaCheck, FaRegCopy, FaMapMarkerAlt, FaArrowRight } from 'react-icons/fa'
 import { contact, socials } from '../../data/socials.js'
+import { useReveal } from '../../hooks/useReveal.js'
+import { useMagnetic } from '../../hooks/useMagnetic.js'
 import './Contact.css'
 
 function Contact() {
+  const [sectionRef, isVisible] = useReveal()
+  const copyRef = useMagnetic(0.25)
+  const [copied, setCopied] = useState(false)
+  const timerRef = useRef(0)
+
+  useEffect(() => () => clearTimeout(timerRef.current), [])
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(contact.email)
+      setCopied(true)
+      clearTimeout(timerRef.current)
+      timerRef.current = setTimeout(() => setCopied(false), 2000)
+    } catch {
+      // Clipboard not available: the email link still works.
+    }
+  }
+
   return (
-    <section id="contact" className="section contact">
-      <div>
-        <span className="eyebrow">Get in touch</span>
-        <h2>
-          Let's <span className="highlight">Connect</span>
-        </h2>
-        <p>Have a question or want to work together? Fill out the form or reach out directly.</p>
-
-        <div className="contact-info">
-          <div className="info-item">
-            <div className="info-icon" aria-hidden="true">✉</div>
-            <div className="info-text">
-              <strong>Email</strong>
-              <a href={`mailto:${contact.email}`}>{contact.email}</a>
-            </div>
-          </div>
-
-          <div className="info-item">
-            <div className="info-icon" aria-hidden="true">📍</div>
-            <div className="info-text">
-              <strong>Location</strong>
-              <span>{contact.location}</span>
-            </div>
-          </div>
-
-          <div className="info-item">
-            <div className="info-icon" aria-hidden="true">🔗</div>
-            <div className="info-text">
-              <strong>Social</strong>
-              <span>
-                {socials.map((social) => (
-                  <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer">
-                    {social.label}
-                  </a>
-                ))}
-              </span>
-            </div>
-          </div>
-        </div>
+    <section
+      id="contact"
+      ref={sectionRef}
+      className={`contact${isVisible ? ' is-visible' : ''}`}
+    >
+      <div className="contact-bg" aria-hidden="true">
+        <span className="contact-grid" />
+        <span className="contact-glow" />
       </div>
 
-      {/* TODO: set action to a form service (e.g. Formspree) so messages are delivered */}
-      <form className="contact-form" action="" method="post">
-        <label htmlFor="name">Name</label>
-        <input type="text" id="name" name="name" placeholder="Your name" required />
+      <div className="section contact-inner">
+        <span className="eyebrow contact-reveal" style={{ '--i': 0 }}>Get in touch</span>
 
-        <label htmlFor="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="you@email.com" required />
+        <h2 className="contact-title">
+          <span className="contact-line">
+            <span className="contact-line-inner" style={{ '--i': 1 }}>Let's</span>
+          </span>{' '}
+          <span className="contact-line">
+            <span className="contact-line-inner highlight" style={{ '--i': 2 }}>Connect</span>
+          </span>
+        </h2>
 
-        <label htmlFor="message">Message</label>
-        <textarea id="message" name="message" placeholder="Your message..." rows="5" required />
+        <p className="contact-text contact-reveal" style={{ '--i': 3 }}>
+          Have a question or want to work together? Feel free to reach out.
+        </p>
 
-        <button type="submit" className="btn-fill">Send Message</button>
-      </form>
+        <div className="contact-email-row contact-reveal" style={{ '--i': 4 }}>
+          <a href={`mailto:${contact.email}`} className="contact-email">
+            {contact.email}
+          </a>
+          <button
+            type="button"
+            ref={copyRef}
+            className="contact-copy"
+            onClick={copyEmail}
+            aria-live="polite"
+          >
+            {copied ? (
+              <>
+                <FaCheck aria-hidden="true" /> Copied
+              </>
+            ) : (
+              <>
+                <FaRegCopy aria-hidden="true" /> Copy
+              </>
+            )}
+          </button>
+        </div>
+
+        <ul className="contact-details contact-reveal" style={{ '--i': 5 }}>
+          <li className="contact-detail">
+            <FaMapMarkerAlt aria-hidden="true" /> {contact.location}
+          </li>
+          {socials.map((social) => {
+            const Icon = social.icon
+            return (
+              <li key={social.label}>
+                <a
+                  href={social.href}
+                  className="contact-detail contact-social"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Icon aria-hidden="true" /> {social.label}
+                  <FaArrowRight className="contact-arrow" aria-hidden="true" />
+                </a>
+              </li>
+            )
+          })}
+        </ul>
+      </div>
     </section>
   )
 }
