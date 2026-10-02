@@ -28,20 +28,19 @@ function Hero() {
               Frontend Developer
             </span>
 
-            <h1 className="hero-title">
+                       <h1 className="hero-title">
               <span className="hero-line">
                 <span className="hero-line-inner hero-greeting" style={{ '--i': 1 }}>
                   Hi, I'm <span className="highlight">Zhra</span> —
                 </span>
-              </span>
+              </span>{' '}
               <span className="hero-line">
                 <span className="hero-line-inner" style={{ '--i': 2 }}>I build clean</span>
-              </span>
+              </span>{' '}
               <span className="hero-line">
                 <span className="hero-line-inner" style={{ '--i': 3 }}>digital experiences</span>
               </span>
             </h1>
-
             <p className="hero-intro" style={{ '--i': 4 }}>
               I turn ideas into responsive, user-friendly websites with clean code and thoughtful
               design. Explore my work and the projects I've built.
