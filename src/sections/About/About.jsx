@@ -1,10 +1,8 @@
 import { Fragment } from 'react'
 import profilePhoto from '../../assets/zozypic.jpg'
-import { skills } from '../../data/skills.js'
 import { useReveal } from '../../hooks/useReveal.js'
 import { useScrollProgress } from '../../hooks/useScrollProgress.js'
 import './About.css'
-import { skills } from '../../data/skills.js'
 
 const statement =
   "I'm a frontend developer passionate about building responsive and user-friendly websites. I enjoy transforming ideas into real projects, exploring new technologies, and continuously improving my skills."
@@ -46,8 +44,6 @@ function About() {
           My goal is to create modern web experiences that are both functional and visually
           engaging.
         </p>
-
-       
       </div>
     </section>
   )

@@ -1,61 +1,37 @@
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa'
 import { projects } from '../../data/projects.js'
+import { useReveal } from '../../hooks/useReveal.js'
+import { useStackProgress } from '../../hooks/useStackProgress.js'
+import ProjectPanel from './ProjectPanel.jsx'
 import './Projects.css'
 
 function Projects() {
+  const [headerRef, isHeaderVisible] = useReveal()
+  const stackRef = useStackProgress()
+
   return (
-    <section id="projects" className="section">
-      <div className="projects-header">
-        <span className="eyebrow">My work</span>
-        <h2>
+    <section id="projects" className="section projects">
+      <div
+        ref={headerRef}
+        className={`projects-header${isHeaderVisible ? ' is-visible' : ''}`}
+      >
+        <span className="eyebrow projects-reveal" style={{ '--i': 0 }}>My work</span>
+        <h2 className="projects-reveal" style={{ '--i': 1 }}>
           Recent <span className="highlight">Projects</span>
+          <sup className="projects-count">{String(projects.length).padStart(2, '0')}</sup>
         </h2>
-        <p>A collection of things I've built while practicing frontend development.</p>
+        <p className="projects-reveal" style={{ '--i': 2 }}>
+          A collection of things I've built while practicing frontend development.
+        </p>
       </div>
 
-      <div className="projects-grid">
-        {projects.map((project) => (
-          <article className="project-card" key={project.title}>
-            <div className="project-thumb">
-              {project.image ? (
-                <img src={project.image} alt={`${project.title} screenshot`} />
-              ) : (
-                <span className="project-thumb-title" aria-hidden="true">{project.title}</span>
-              )}
-            </div>
-
-            <div className="project-body">
-              <h3>{project.title}</h3>
-              <p>{project.description}</p>
-
-              {project.features?.length > 0 && (
-                <ul className="project-features">
-                  {project.features.map((feature) => (
-                    <li key={feature}>{feature}</li>
-                  ))}
-                </ul>
-              )}
-
-              <ul className="project-tags">
-                {project.tags.map((tag) => (
-                  <li className="tag" key={tag}>{tag}</li>
-                ))}
-              </ul>
-
-              <div className="project-links">
-                {project.github && (
-                  <a href={project.github} className="project-link" target="_blank" rel="noopener noreferrer">
-                    <FaGithub aria-hidden="true" /> GitHub
-                  </a>
-                )}
-                {project.demo && (
-                  <a href={project.demo} className="project-link" target="_blank" rel="noopener noreferrer">
-                    <FaExternalLinkAlt aria-hidden="true" /> Live demo
-                  </a>
-                )}
-              </div>
-            </div>
-          </article>
+      <div ref={stackRef} className="projects-stack">
+        {projects.map((project, index) => (
+          <ProjectPanel
+            key={project.title}
+            project={project}
+            index={index}
+            total={projects.length}
+          />
         ))}
       </div>
     </section>
