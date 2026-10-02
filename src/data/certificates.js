@@ -7,7 +7,7 @@ export const certificates = [
     title: 'Front-End Development',
     issuer: 'Coursera',
     date: null,
-    status: 'In progress',
+    status: null,
     description:
       'Front-end development fundamentals, responsive design principles and core web concepts.',
     link: null,
