@@ -1,46 +1,177 @@
+/* ===== About ===== */
 .about {
+  position: relative;
   display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 48px;
+  grid-template-columns: 5fr 7fr;
+  gap: clamp(40px, 6vw, 88px);
   align-items: center;
+  padding-top: 120px;
+  padding-bottom: 120px;
 }
 
-.about-img .profile-photo {
-  margin: 0 auto;
+/* gradient divider between Hero and About */
+.about::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--pink), var(--cyan), transparent);
+  opacity: 0.5;
 }
 
-.about-text h2 {
-  margin-bottom: 16px;
+/* ----- Photo ----- */
+.about-photo {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: 28px;
+  overflow: hidden;
+  background-color: var(--surface);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
 }
 
-.about-text p {
-  margin-bottom: 14px;
+.about-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(247, 238, 246, 0.08);
+  background: linear-gradient(180deg, transparent 55%, rgba(26, 11, 28, 0.65));
+  pointer-events: none;
 }
 
-.skills {
+.about-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ----- Content ----- */
+.about-content h2 {
+  margin-bottom: 28px;
+}
+
+.about-statement {
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.45;
+  font-weight: 500;
+  margin-bottom: 28px;
+}
+
+/* words light up as you scroll (see useScrollProgress) */
+.about-statement span {
+  color: rgba(247, 238, 246, 0.2);
+  transition: color 0.35s ease;
+}
+
+.about-statement span.is-lit {
+  color: var(--text);
+}
+
+.about-goal {
+  max-width: 52ch;
+  padding-left: 20px;
+  margin-bottom: 32px;
+  border-left: 2px solid;
+  border-image: var(--gradient) 1;
+}
+
+.about-skills {
+  list-style: none;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 24px;
-  list-style: none;
 }
 
-.chip {
-  background-color: var(--surface-2);
-  color: var(--text);
-  border: 1px solid var(--border);
-  padding: 6px 16px;
+.about-chip {
+  padding: 8px 18px;
   border-radius: 999px;
   font-size: 15px;
+  color: var(--text);
+  background-color: rgba(58, 28, 61, 0.6);
+  border: 1px solid var(--border);
+  transition: border-color 0.25s ease, color 0.25s ease, translate 0.25s ease;
 }
 
-@media (max-width: 800px) {
-  .about {
-    grid-template-columns: 1fr;
-    text-align: center;
+.about-chip:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  translate: 0 -2px;
+}
+
+/* ----- Motion ----- */
+@media (prefers-reduced-motion: no-preference) {
+  .about:not(.is-visible) .about-reveal,
+  .about:not(.is-visible) .about-chip {
+    opacity: 0;
   }
 
-  .skills {
-    justify-content: center;
+  .about.is-visible .about-reveal,
+  .about.is-visible .about-chip {
+    animation: about-fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--i, 0) * 80ms + 100ms);
+  }
+
+  /* photo is revealed from bottom to top */
+  .about:not(.is-visible) .about-photo {
+    clip-path: inset(100% 0 0 0 round 28px);
+  }
+
+  .about.is-visible .about-photo {
+    animation: about-photo-reveal 1.2s cubic-bezier(0.77, 0, 0.18, 1) both;
+  }
+
+  .about.is-visible .about-photo img {
+    animation: about-photo-zoom 1.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes about-fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+}
+
+@keyframes about-photo-reveal {
+  from { clip-path: inset(100% 0 0 0 round 28px); }
+  to { clip-path: inset(0 0 0 0 round 28px); }
+}
+
+@keyframes about-photo-zoom {
+  from { scale: 1.2; }
+}
+
+/* photo drifts slightly while the section scrolls by (parallax) */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .about-media {
+      animation: about-parallax linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+  }
+}
+
+@keyframes about-parallax {
+  from { translate: 0 40px; }
+  to { translate: 0 -40px; }
+}
+
+/* ----- Responsive ----- */
+@media (max-width: 900px) {
+  .about {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+
+  .about-media {
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  .about-statement {
+    font-size: 22px;
   }
 }
