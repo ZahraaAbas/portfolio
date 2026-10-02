@@ -79,12 +79,11 @@
 
 /* ----- Motion ----- */
 @media (prefers-reduced-motion: no-preference) {
-    .about:not(.is-visible) .about-reveal {
+  .about:not(.is-visible) .about-reveal {
     opacity: 0;
   }
 
   .about.is-visible .about-reveal {
-  .about.is-visible .about-chip {
     animation: about-fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
     animation-delay: calc(var(--i, 0) * 80ms + 100ms);
   }
