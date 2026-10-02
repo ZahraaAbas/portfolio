@@ -4,17 +4,17 @@
 // link: the credential URL (for example from Coursera), or null.
 export const certificates = [
   {
-    title: 'Front-End Development',
-    issuer: 'Coursera',
-    date: null,
+    title: 'Meta Front-End Developer Professional Certificate',
+    issuer: 'Meta · Coursera',
+    date: 'Oct 2026',
     status: null,
     description:
-      'Front-end development fundamentals, responsive design principles and core web concepts.',
-    link: null,
+      '9-course program covering HTML and CSS, JavaScript, React, version control, UX/UI design principles and a front-end capstone project.',
+    link: 'https://coursera.org/verify/professional-cert/YKQERDB1Y5C9',
   },
   {
     title: 'Sales Fundamentals',
-    issuer: null,
+    issuer: 'Maarif Platform',
     date: null,
     status: null,
     description: 'Sales principles, customer engagement and effective communication techniques.',
